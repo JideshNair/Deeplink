@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.fcm">
+    <!-- Added by CleverTap Assistant -->
+    <!-- Required to allow the app to send events and user profile information -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Recommended so that CleverTap knows when to attempt a network call -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".Applicationnew"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PushTemplate">
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.PushTemplate.NoActionBar" >
+            <intent-filter>
+                <action android:name="test"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.PushTemplate.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="trst.com"
+                    android:scheme="trst" />
+            </intent-filter>
+        </activity> <!-- Added by CleverTap Assistant -->
+        <!-- Activities to be excluded from in-app notifications -->
+        <meta-data
+            android:name="CLEVERTAP_INAPP_EXCLUDE"
+            android:value="" />
+        <meta-data
+            android:name="CLEVERTAP_REGION"
+            android:value="eu1" /> <!-- Adding CleverTap Credentials -->
+        <meta-data
+            android:name="CLEVERTAP_ACCOUNT_ID"
+            android:value="R74-547-885Z" />
+        <meta-data
+            android:name="CLEVERTAP_TOKEN"
+            android:value="a45-4a2" /> <!-- Added by CleverTap Assistant -->
+        <service
+            android:name=".fcm.FcmMessageListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.clevertap.pushtemplates.PTNotificationIntentService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.clevertap.PT_PUSH_EVENT" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.clevertap.pushtemplates.PTPushNotificationReceiver"
+            android:enabled="true"
+            android:exported="false"></receiver>
+        <receiver
+            android:name="com.clevertap.pushtemplates.PushTemplateReceiver"
+            android:enabled="true"
+            android:exported="false"></receiver>
+
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" /> <!-- IMPORTANT: To force use Google AD ID to uniquely identify  users, use the following meta tag. GDPR mandates that if you are using this tag, there is prominent disclousure to your end customer in their application. Read more about GDPR here - https://clevertap.com/blog/in-preparation-of-gdpr-compliance/ -->
+        <meta-data
+            android:name="CLEVERTAP_USE_GOOGLE_AD_ID"
+            android:value="0" />
+    </application>
+
+</manifest>
