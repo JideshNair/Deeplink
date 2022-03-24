@@ -9,13 +9,14 @@ import androidx.annotation.NonNull;
 
 import android.util.Log;
 
+import com.clevertap.android.pushtemplates.TemplateRenderer;
 import com.clevertap.android.sdk.CleverTapAPI;
 
 
+import com.clevertap.android.sdk.Utils;
 import com.clevertap.android.sdk.interfaces.OnInitCleverTapIDListener;
 import com.clevertap.android.sdk.pushnotification.NotificationInfo;
-import com.clevertap.pushtemplates.TemplateRenderer;
-import com.clevertap.pushtemplates.Utils;
+
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -28,37 +29,6 @@ public class FcmMessageListenerService extends FirebaseMessagingService {
 	@Override
 	public void onMessageReceived(RemoteMessage remoteMessage) {
 		super.onMessageReceived(remoteMessage);
-
-		RemoteMessage.Notification notification = remoteMessage.getNotification();
-		try {
-			if (remoteMessage.getData().size() > 0) {
-				Bundle extras = new Bundle();
-				for (Map.Entry<String, String> entry : remoteMessage.getData().entrySet()) {
-					extras.putString(entry.getKey(), entry.getValue());
-					Log.d("key,value", entry.getKey()+" and "+entry.getValue());
-				}
-
-				NotificationInfo info = CleverTapAPI.getNotificationInfo(extras);
-
-
-				if (info.fromCleverTap) {
-					if (Utils.isForPushTemplates(extras)) {
-						TemplateRenderer.createNotification(getApplicationContext(), extras);
-						//TemplateRenderer.createNotification(context, extras, config);
-					} else {
-						CleverTapAPI.createNotification(getApplicationContext(), extras);
-					}
-
-
-				} else {
-					Map<String, String> data = remoteMessage.getData();
-					Log.d("FROM", remoteMessage.getFrom());
-				}
-			}
-		} catch (Throwable t) {
-			Log.d("MYFCMLIST", "Error parsing FCM message", t);
-		}
-
 
 	}
 

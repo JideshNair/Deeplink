@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".NewMain"
             android:label="@string/app_name"
             android:theme="@style/Theme.PushTemplate.NoActionBar">
             <intent-filter>
@@ -41,6 +41,7 @@
                     android:host="trst.com"
                     android:scheme="trst" />
             </intent-filter>
+
         </activity> <!-- Added by CleverTap Assistant -->
         <!-- Activities to be excluded from in-app notifications -->
         <meta-data
@@ -56,38 +57,18 @@
             android:name="CLEVERTAP_TOKEN"
             android:value="a45-4a2" /> <!-- Added by CleverTap Assistant -->
         <service
-            android:name=".fcm.FcmMessageListenerService"
-            android:exported="false">
+            android:name="com.clevertap.android.sdk.pushnotification.fcm.FcmMessageListenerService"
+            android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <service
-            android:name="com.clevertap.pushtemplates.PTNotificationIntentService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.clevertap.PT_PUSH_EVENT" />
-            </intent-filter>
-        </service>
-
-        <receiver
-            android:name="com.clevertap.pushtemplates.PTPushNotificationReceiver"
-            android:enabled="true"
-            android:exported="false"></receiver>
-        <receiver
-            android:name="com.clevertap.pushtemplates.PushTemplateReceiver"
-            android:enabled="true"
-            android:exported="false"></receiver>
-
         <meta-data
             android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />
         <meta-data
             android:name="firebase_analytics_collection_enabled"
             android:value="false" /> <!-- IMPORTANT: To force use Google AD ID to uniquely identify  users, use the following meta tag. GDPR mandates that if you are using this tag, there is prominent disclousure to your end customer in their application. Read more about GDPR here - https://clevertap.com/blog/in-preparation-of-gdpr-compliance/ -->
-        <meta-data
-            android:name="CLEVERTAP_USE_GOOGLE_AD_ID"
-            android:value="0" />
     </application>
 
 </manifest>
